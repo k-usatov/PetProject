@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.readystatesoftware.chuck.ChuckInterceptor;
+
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,10 +18,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+
         Api api = retrofit.create(Api.class);
 
         Call<List<Post>> call = api.getPosts();
@@ -40,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 List<Post> posts = response.body();
 
 
-                for(Post p : posts.subList(1, 10)){
-                    Log.d(TAG,"userId = " +  String.valueOf(p.getUserId()));
-                    Log.d(TAG,"id = " + String.valueOf(p.getId()));
-                    Log.d(TAG,"title = " + p.getTitle());
+                for (Post p : posts.subList(1, 10)) {
+                    Log.d(TAG, "userId = " + String.valueOf(p.getUserId()));
+                    Log.d(TAG, "id = " + String.valueOf(p.getId()));
+                    Log.d(TAG, "title = " + p.getTitle());
                 }
 
 
