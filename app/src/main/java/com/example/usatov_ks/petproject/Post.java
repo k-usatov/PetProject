@@ -6,25 +6,21 @@ import com.google.gson.annotations.SerializedName;
  * Created by usatov_ks on 13.02.2018.
  */
 
-public class Posts {
+public class Post {
 
     @SerializedName("userId")
-    @Expose
     private int userId;
 
 
     @SerializedName("id")
-    @Expose
     private int id;
 
 
     @SerializedName("title")
-    @Expose
     private String title;
 
 
     @SerializedName("body")
-    @Expose
     private String body;
 
     public int getUserId() {
@@ -35,7 +31,7 @@ public class Posts {
         this.userId = userId;
     }
 
-    public Posts withUserId(int userId) {
+    public Post withUserId(int userId) {
         this.userId = userId;
         return this;
     }
@@ -48,7 +44,7 @@ public class Posts {
         this.id = id;
     }
 
-    public Posts withId(int id) {
+    public Post withId(int id) {
         this.id = id;
         return this;
     }
@@ -61,7 +57,7 @@ public class Posts {
         this.title = title;
     }
 
-    public Posts withTitle(String title) {
+    public Post withTitle(String title) {
         this.title = title;
         return this;
     }
@@ -74,7 +70,7 @@ public class Posts {
         this.body = body;
     }
 
-    public Posts withBody(String body) {
+    public Post withBody(String body) {
         this.body = body;
         return this;
     }

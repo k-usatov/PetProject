@@ -10,9 +10,6 @@ import retrofit2.http.GET;
  */
 
 public interface Api {
-
-    String BASE_URL = "https://jsonplaceholder.typicode.com/";
-
     @GET("posts")
-    Call<List<Posts>> getPosts();
+    Call<List<Post>> getPosts();
 }

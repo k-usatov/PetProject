@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">PetProject</string>
-    <string name="request" />
+    <string name="request">Request</string>
 </resources>
