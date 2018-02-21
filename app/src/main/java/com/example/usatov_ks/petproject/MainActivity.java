@@ -1,9 +1,11 @@
 package com.example.usatov_ks.petproject;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.readystatesoftware.chuck.ChuckInterceptor;
@@ -27,37 +29,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+    public void onClick(View view){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Intent intent = new Intent(this, DataActivity.class);
+        startActivity(intent);
 
-
-        Api api = retrofit.create(Api.class);
-
-        Call<List<Post>> call = api.getPosts();
-
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                List<Post> posts = response.body();
-
-
-                for (Post p : posts.subList(1, 10)) {
-                    Log.d(TAG, "userId = " + String.valueOf(p.getUserId()));
-                    Log.d(TAG, "id = " + String.valueOf(p.getId()));
-                    Log.d(TAG, "title = " + p.getTitle());
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 }
