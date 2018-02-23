@@ -1,0 +1,76 @@
+package com.example.usatov_ks.petproject;
+
+import android.content.ContentValues;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.readystatesoftware.chuck.ChuckInterceptor;
+
+import java.util.List;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+/**
+ * Created by usatov_ks on 20.02.2018.
+ */
+
+public class DataActivity extends AppCompatActivity {
+
+    private ArrayAdapter adapter;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_data);
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new ChuckInterceptor(this))
+                .build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        Api api = retrofit.create(Api.class);
+
+        Call<List<Post>> call = api.getPosts();
+
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                List<Post> posts = response.body();
+
+                for (Post p : posts.subList(0, 10)) {
+
+                    Log.d("userId", String.valueOf(p.getUserId()));
+                    Log.d("id", String.valueOf(p.getId()));
+                    Log.d("title", String.valueOf(p.getTitle()));
+                }
+
+
+
+            }
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
+    }
+}

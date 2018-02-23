@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PetProject</string>
+    <string name="request">Request</string>
+    <string name="list_data">Полученные данные</string>
 </resources>
